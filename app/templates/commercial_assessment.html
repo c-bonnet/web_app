@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('.static', filename='commercial_assessment.css') }}">
+{% endblock %}
+
+{% block app_content %}    
+<h1>Welcome to the Commercial Assessment application</h1>
+<div class="container-fluid">
+    <form class="form-commercialassessment" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-4">
+                {{ wtf.form_field(form.description) }}
+            </div>
+            <div class="col-md-4">
+                {{ wtf.form_field(form.site_type) }}
+            </div>
+            <div class="col-md-4">
+                {{ wtf.form_field(form.rated_power) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                {{ wtf.form_field(form.export_capacity) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.import_capacity) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.spill) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.generation_data) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                {{ wtf.form_field(form.summer_op_hours) }}
+                {{ wtf.form_field(form.summer_p_hours) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.summer_op_price) }}
+                {{ wtf.form_field(form.summer_p_price) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.winter_op_hours) }}
+                {{ wtf.form_field(form.winter_p_hours) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.winter_op_price) }}
+                {{ wtf.form_field(form.winter_p_price) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                {{ wtf.form_field(form.miner_power) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.miner_hashing) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.miner_price) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.miner_number) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                {{ wtf.form_field(form.powerbox_shell_cost) }}
+            </div>
+            <div class="col-md-3">
+                {{ wtf.form_field(form.powerbox_maintenance) }}
+            </div>
+        </div>
+        {{ wtf.form_field(form.submit, class="btn btn-lg btn-primary btn-block", style="width:100%;") }}
+    </form>
+</div>
+
+
+<h2>Results</h2>
+{% if results %}
+    <div class="table-responsive-md">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for key,value in results.items() %}
+                <tr>
+                    <th scope="row">
+                        {{ key }}
+                    </th>
+                    <td>
+                        {{ value }}
+                    </td>
+                </tr>            
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p>Click "Run Commercial Assessment" to run the commercial assessment.</p>
+{% endif %}
+{% endblock %}
