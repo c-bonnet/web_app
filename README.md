@@ -1,4 +1,6 @@
 # web_app
-Template of a web application written with Flask
+Web application written with Flask for Lake Parime.
 
-Procfile file is for deployment on Heroku
+The application is deployed at https://lp-analytics.herokuapp.com.
+
+Procfile file is for deployment on Heroku.
